@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Financiero</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Bienvenido, {{ nombre }}</h1>
+        <nav>
+            <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+            <form action="{{ url_for('reset_datos') }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn-reset">Reiniciar Datos</button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Actualizar Sueldo y Agregar Gasto</h2>
+            <form method="POST">
+                <label for="sueldo">Sueldo Actual:</label>
+                <input type="number" name="sueldo" value="{{ sueldo or '' }}" step="0.01" required>
+
+                <label for="gasto">Monto del Gasto:</label>
+                <input type="number" name="gasto" step="0.01">
+
+                <label for="categoria">Categoría:</label>
+                <select name="categoria">
+                    {% for cat in categorias %}
+                    <option value="{{ cat }}">{{ cat }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Actualizar</button>
+            </form>
+        </section>
+
+        <section class="charts">
+            <canvas id="grafico1"></canvas>
+            <canvas id="grafico2"></canvas>
+            <canvas id="grafico3"></canvas>
+        </section>
+
+        <section class="resumen">
+            <h2>Resumen de Gastos</h2>
+            <p><strong>Sueldo:</strong> ${{ '%.2f'|format(sueldo or 0) }}</p>
+            <p><strong>Gastos Totales:</strong> ${{ '%.2f'|format(gastos_totales) }}</p>
+            <p><strong>Ahorro Restante:</strong> ${{ '%.2f'|format(ahorro) }}</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cat, total in gastos_categoria.items() %}
+                    <tr>
+                        <td>{{ cat }}</td>
+                        <td>${{ '%.2f'|format(total|sum) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        const sueldo = {{ sueldo or 0 }};
+        const gastosTotales = {{ gastos_totales|tojson }};
+        const ahorro = {{ ahorro|tojson }};
+        const categorias = {{ categorias|tojson }};
+        const gastosPorCategoria = {{ gastos_por_categoria|tojson }};
+
+        new Chart(document.getElementById('grafico1'), {
+            type: 'bar',
+            data: {
+                labels: ['Finanzas'],
+                datasets: [
+                    { label: 'Sueldo', data: [sueldo], backgroundColor: 'blue' },
+                    { label: 'Gastos Totales', data: [gastosTotales], backgroundColor: 'red' },
+                    { label: 'Ahorro', data: [ahorro], backgroundColor: 'green' }
+                ]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+        });
+
+        new Chart(document.getElementById('grafico2'), {
+            type: 'line',
+            data: {
+                labels: ['Sueldo Inicial', 'Gastos', 'Ahorro Restante'],
+                datasets: [{ label: 'Saldo', data: [sueldo, gastosTotales, ahorro], borderColor: 'green', fill: false }]
+            },
+            options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
+
+        new Chart(document.getElementById('grafico3'), {
+            type: 'doughnut',
+            data: {
+                labels: categorias,
+                datasets: [{ label: 'Distribución de Gastos', data: gastosPorCategoria, backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'] }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+</body>
+</html>

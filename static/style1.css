@@ -1,0 +1,108 @@
+/* Fondo y tipografía */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+
+    /* Imagen de fondo */
+    
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                    url("/static/images/fondo.jpg") no-repeat center center fixed;
+    background-size: cover;
+
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+}
+/* Contenedor del formulario */
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Títulos */
+h1 {
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Etiquetas e inputs */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input:focus {
+    border-color: #6a11cb;
+    outline: none;
+}
+
+/* Botón */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #6a11cb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #4e0fa6;
+}
+
+/* Enlaces */
+p {
+    margin-top: 15px;
+}
+
+a {
+    color: #2575fc;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.sena{
+    height: 78px
+}

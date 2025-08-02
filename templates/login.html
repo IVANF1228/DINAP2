@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <img class="sena" src="{{ url_for('static', filename='images/SENA.png') }}" alt="Logo" class="logo">
+        <h1>DINAP</h1>
+        <h1>Iniciar Sesión </h1>
+        <form method="POST">
+            <label>Correo:</label>
+            <input type="email" name="correo" required>
+            <label>Contraseña:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Ingresar</button>
+        </form>
+        <p>¿No tienes cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a></p>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <p style="color:red;">{{ messages[0] }}</p>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

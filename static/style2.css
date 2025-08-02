@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+        /* Imagen de fondo */
+    
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                    url("/static/images/fondo.jpg") no-repeat center center fixed;
+    background-size: cover;
+
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+main {
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.form-section, .charts, .resumen {
+    background: white;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+form label {
+    display: block;
+    margin: 0.5rem 0 0.2rem;
+}
+
+form input, form select, button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.charts canvas {
+    flex: 1 1 300px;
+    max-width: 400px;
+    max-height: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.5rem;
+}
+
+.resumen table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.resumen th, .resumen td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.resumen th {
+    background-color: #4CAF50;
+    color: white;
+}
