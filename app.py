@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = "clave_secreta"  # Cambiar en producción
 
 DB_FILE = "datos.json"
-#esta es una actualización para probar el proyecto
+
 if os.path.exists(DB_FILE):
     with open(DB_FILE, "r") as f:
         usuarios = json.load(f)
